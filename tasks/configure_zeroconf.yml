@@ -1,0 +1,6 @@
+---
+# file: roles/vac/tasks/configure_zeroconf.yml
+
+# configure networking to disable zeroconf
+- lineinfile: dest=/etc/sysconfig/network regexp=^NOZEROCONF line=NOZEROCONF=yes
+  notify: restart networking

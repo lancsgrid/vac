@@ -1,0 +1,63 @@
+---
+# file: roles/vac/tasks/install_dependencies.yml
+
+# libvirt and dependencies
+- name: ensure libvirt and kvm are installed
+  yum: state=present name={{ item }}
+  with_items:
+  - libvirt
+  - libvirt-client
+  - libvirt-python
+  - qemu-kvm
+  notify: restart libvirtd
+
+- name: ensure libvirtd is running and enabled
+  service: name=libvirtd state=running enabled=yes
+
+- name: ensure ksm is running and enabled
+  service: name=ksm state=running enabled=yes
+
+- name: ensure ksmtuned is running and enabled
+  service: name=ksmtuned state=running enabled=yes
+
+
+# cgconfig 
+- name: ensure libcgroup is installed
+  yum: state=present name=libcgroup
+
+- name: ensure libcgroup is running and enabled
+  service: name=cgconfig state=running enabled=yes
+
+
+# rpcbind 
+- name: ensure rpcbind is installed
+  yum: state=present name=rpcbind
+
+- name: ensure rpcbind is running and enabled
+  service: name=rpcbind state=running enabled=yes
+
+
+# numad 
+- name: ensure numad is installed
+  yum: state=present name=numad
+
+- name: ensure numad is running and enabled
+  service: name=numad state=running enabled=yes
+
+
+# nfs
+- name: ensure nfs-utils is installed
+  yum: state=present name=nfs-utils
+
+- name: ensure nfs is running and enabled
+  service: name=nfs state=running enabled=yes
+
+
+# install repos for egi
+- name: configure repo for vac and egi
+  copy: src=repos/EGI-trust.repo dest=/etc/yum.repos.d/EGI-trust.repo
+
+
+# install ca policy
+- name: ensure ca policy is installed
+  yum: state=present name=ca-policy-egi-core

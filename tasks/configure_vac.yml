@@ -1,0 +1,38 @@
+---
+# file: roles/vac/tasks/configure_vac.yml
+
+
+# generate ssh key pair for vac
+- name: Creating pub SSH keys
+  user: name=root generate_ssh_key=yes ssh_key_file=.ssh/id_rsa
+
+# copy configs for vac
+- name: ensure vac config files are present
+  copy: src=vac/vac.conf dest=/etc/vac.conf
+
+# copy ssh keys to /etc/vac.d
+- name: copy vm-keys and vm-cert to /etc/vac.d
+  copy: src={{item.src}} dest={{item.dest}} mode={{item.mode}}
+  with_items:
+    - {src: vac/vm-cert.pem, dest: /etc/vac.d/vm-cert.pem, mode: "u=rw,g=r,o=r"}
+    - {src: vac/vm-key.pem,  dest: /etc/vac.d/vm-key.pem,  mode: "u=r,g=,o="}
+
+# check vmtype directories exist
+- name: copy vm-keys and vm-cert to /etc/vac.d
+  file: path={{item}} state=directory mode=0755
+  with_items:
+  - /var/lib/vac/vmtypes/atlas
+  - /var/lib/vac/vmtypes/lhcb
+  - /var/lib/vac/vmtypes/gridpp
+
+# copy ssh keys to /var/lib/vac/vmtypes/
+- name: copy vm-keys and vm-cert to /etc/vac.d
+  copy: src=vac/vm-cert.pem dest=/var/lib/vac/vmtypes/{{ item }}/vm-cert.pem mode="u=rw,g=r,o=r"
+  with_items:
+  - atlas
+  - lhcb
+  - gridpp
+
+# ensure vacd is enabled and on
+- name: ensure vac is enabled
+  service: state=started name=vacd enabled=yes

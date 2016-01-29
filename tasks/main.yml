@@ -1,2 +1,8 @@
 ---
 # tasks file for vac
+
+- include: configure_iptables.yml
+- include: configure_zeroconf.yml
+- include: install_dependencies.yml
+- include: install_vac.yml
+- include: configure_vac.yml

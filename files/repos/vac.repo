@@ -1,0 +1,5 @@
+[VAC]
+name=VAC
+baseurl=http://repo.gridpp.ac.uk/vacproject/vac/current/RPMS/
+enabled=1
+gpgcheck=0
