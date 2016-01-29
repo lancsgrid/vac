@@ -1,2 +1,5 @@
 ---
 # defaults file for vac
+
+#ip address or range permitted to ssh into vac hosts.
+vac_gateway_ip: 0.0.0.0
