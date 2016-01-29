@@ -1,0 +1,8 @@
+---
+# file: roles/vac/tasks/configure_iptables.yml
+
+# configure iptables to allow input from virbr1
+# will overwrite any existing iptables.
+- name: ensure iptables is configured
+  copy: src=iptables/iptables dest=/etc/sysconfig/iptables
+  notify: restart iptables

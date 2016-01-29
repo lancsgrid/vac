@@ -1,0 +1,12 @@
+---
+# file: roles/vac/tasks/install_vac.yml
+
+   
+# install repos for vac
+- name: configure repo for vac and egi
+  copy: src=repos/vac.repo dest=/etc/yum.repos.d/vac.repo
+
+# install vac
+- name: ensure vac is installed
+  yum: state=present name=vac
+
