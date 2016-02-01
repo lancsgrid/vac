@@ -5,5 +5,5 @@
 vac_gateway_ip: 0.0.0.0
 
 # location of host certificate and key.
-vac-vm-cert: /root/vac-vm-cert.pem 
-vac-vm-key: /root/vac-vm-cert.pem 
+vac_vm_cert: /root/vac-vm-cert.pem 
+vac_vm_key: /root/vac-vm-cert.pem 
