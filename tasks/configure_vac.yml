@@ -14,8 +14,8 @@
 - name: copy vm-keys and vm-cert to /etc/vac.d
   copy: src={{item.src}} dest={{item.dest}} mode={{item.mode}}
   with_items:
-    - {src: vac/vm-cert.pem, dest: /etc/vac.d/vm-cert.pem, mode: "u=rw,g=r,o=r"}
-    - {src: vac/vm-key.pem,  dest: /etc/vac.d/vm-key.pem,  mode: "u=r,g=,o="}
+    - {src: "{{ vac_vm_cert }}", dest: /etc/vac.d/vm-cert.pem, mode: "u=rw,g=r,o=r"}
+    - {src: "{{ vac_vm_key }}",  dest: /etc/vac.d/vm-key.pem,  mode: "u=r,g=,o="}
 
 # check vmtype directories exist
 - name: copy vm-keys and vm-cert to /etc/vac.d
@@ -27,7 +27,7 @@
 
 # copy ssh keys to /var/lib/vac/vmtypes/
 - name: copy vm-keys and vm-cert to /etc/vac.d
-  copy: src=vac/vm-cert.pem dest=/var/lib/vac/vmtypes/{{ item }}/vm-cert.pem mode="u=rw,g=r,o=r"
+  copy: src="{{ vac_vm_cert }}" dest=/var/lib/vac/vmtypes/{{ item }}/vm-cert.pem mode="u=rw,g=r,o=r"
   with_items:
   - atlas
   - lhcb

@@ -15,7 +15,7 @@
   service: name=libvirtd state=running enabled=yes
 
 - name: ensure ksm is running and enabled
-  service: name=ksm state=running enabled=yes
+  service: name=ksm enabled=yes
 
 - name: ensure ksmtuned is running and enabled
   service: name=ksmtuned state=running enabled=yes
