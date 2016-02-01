@@ -16,7 +16,6 @@
   with_items:
     - {src: "{{ vac_vm_cert }}", dest: /etc/vac.d/vm-cert.pem, mode: "u=rw,g=r,o=r"}
     - {src: "{{ vac_vm_key }}",  dest: /etc/vac.d/vm-key.pem,  mode: "u=r,g=,o="}
-  tags: vac_test
 
 # check vmtype directories exist
 - name: copy vm-keys and vm-cert to /etc/vac.d
