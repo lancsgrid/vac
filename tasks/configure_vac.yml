@@ -14,8 +14,8 @@
 - name: copy vm-keys and vm-cert to /etc/vac.d
   copy: src={{item.src}} dest={{item.dest}} mode={{item.mode}}
   with_items:
-    - {src: {{vac-vm-cert}}, dest: /etc/vac.d/vm-cert.pem, mode: "u=rw,g=r,o=r"}
-    - {src: {{vac-vm-key}},  dest: /etc/vac.d/vm-key.pem,  mode: "u=r,g=,o="}
+    - '{src: {{vac-vm-cert}}, dest: /etc/vac.d/vm-cert.pem, mode: "u=rw,g=r,o=r"}'
+    - '{src: {{vac-vm-key}},  dest: /etc/vac.d/vm-key.pem,  mode: "u=r,g=,o="}'
 
 # check vmtype directories exist
 - name: copy vm-keys and vm-cert to /etc/vac.d
