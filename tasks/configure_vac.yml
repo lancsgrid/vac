@@ -8,7 +8,7 @@
 
 # copy configs for vac
 - name: ensure vac config files are present
-  copy: src=vac/vac.conf dest=/etc/vac.conf
+  template: src=vac/vac.conf.j2 dest=/etc/vac.conf
 
 # copy ssh keys to /etc/vac.d
 - name: copy vm-keys and vm-cert to /etc/vac.d
