@@ -7,3 +7,72 @@ vac_gateway_ip: 0.0.0.0
 # location of host certificate and key.
 vac_vm_cert: /root/vac-vm-cert.pem 
 vac_vm_key: /root/vac-vm-cert.pem 
+
+
+
+
+
+# defaults for vac.conf
+
+vac_mb_per_machine = 2048
+vac_total_machines = 6
+vac_scratch_gb = 25
+vac_volume_group = VolGroup
+
+[vmtype atlas]
+vac_atlas_vm_model = cernvm3
+vac_atlas_heartbeat_file = vm-heartbeat
+vac_atlas_heartbeat_seconds = 600
+vac_atlas_root_image = https://repo.gridpp.ac.uk/vacproject/atlas/cernvm3.iso
+vac_atlas_root_public_key = /root/.ssh/id_rsa.pub
+#user_data = https://www.gridpp.ac.uk/vac/atlas/user_data
+vac_atlas_user_data = https://repo.gridpp.ac.uk/vacproject/atlas/user_data
+vac_atlas_user_data_option_queue = UKI-NORTHGRID-LANCS-HEP_VAC
+vac_atlas_user_data_option_cvmfs_proxy = http://pygrid-kraken.hec.lancs.ac.uk:3128
+vac_atlas_user_data_file_hostcert = /etc/vac.d/vm-cert.pem
+vac_atlas_user_data_file_hostkey = /etc/vac.d/vm-key.pem
+vac_atlas_user_data_option_default_se = fal-pygrid-30.lancs.ac.uk
+vac_atlas_user_data_option_http_logs = http://%f/
+vac_atlas_backoff_seconds = 600
+vac_atlas_fizzle_seconds = 600
+vac_atlas_max_wallclock_seconds = 172800
+vac_atlas_log_machineoutputs = True
+vac_atlas_accounting_fqan = /atlas/Role=NULL/Capability=NULL
+vac_atlas_target_share = 98
+
+[vmtype lhcb]
+vac_lhcb_vm_model = cernvm3
+vac_lhcb_heartbeat_file = vm-heartbeat
+vac_lhcb_heartbeat_seconds = 600
+vac_lhcb_root_image = https://lhcbproject.web.cern.ch/lhcbproject/Operations/VM/cernvm3.iso
+vac_lhcb_root_public_key = /root/.ssh/id_rsa.pub
+vac_lhcb_user_data = https://lhcbproject.web.cern.ch/lhcbproject/Operations/VM/user_data
+vac_lhcb_user_data_option_dirac_site = VAC.Lancaster.uk
+vac_lhcb_user_data_option_cvmfs_proxy = http://pygrid-kraken.hec.lancs.ac.uk:3128
+vac_lhcb_user_data_file_hostcert = vm-cert.pem
+vac_lhcb_user_data_file_hostkey = vm-key.pem
+vac_lhcb_backoff_seconds = 600
+vac_lhcb_fizzle_seconds = 600
+vac_lhcb_max_wallclock_seconds = 172800
+vac_lhcb_log_machineoutputs = True
+vac_lhcb_accounting_fqan = /lhcb/Role=NULL/Capability=NULL
+vac_lhcb_target_share = 1
+
+[vmtype gridpp]
+vac_gridpp_vm_model = cernvm3
+vac_gridpp_heartbeat_file = vm-heartbeat
+vac_gridpp_heartbeat_seconds = 600
+vac_gridpp_root_image = https://repo.gridpp.ac.uk/vacproject/gridpp/cernvm3.iso
+vac_gridpp_root_public_key = /root/.ssh/id_rsa.pub
+vac_gridpp_user_data = https://repo.gridpp.ac.uk/vacproject/gridpp/user_data
+vac_gridpp_user_data_option_dirac_site = VAC.Lancaster.uk
+vac_gridpp_user_data_option_submit_pool = gridppPool
+vac_gridpp_user_data_option_cvmfs_proxy = http://pygrid-kraken.hec.lancs.ac.uk:3128
+vac_gridpp_user_data_file_hostcert = /etc/vac.d/vm-cert.pem
+vac_gridpp_user_data_file_hostkey = /etc/vac.d/vm-key.pem
+vac_gridpp_backoff_seconds = 600
+vac_gridpp_fizzle_seconds = 600
+vac_gridpp_max_wallclock_seconds = 172800
+vac_gridpp_log_machineoutputs = True
+vac_gridpp_accounting_fqan = /gridpp/Role=NULL/Capability=NULL
+vac_gridpp_target_share = 1
