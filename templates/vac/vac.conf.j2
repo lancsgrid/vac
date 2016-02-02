@@ -22,7 +22,6 @@ vac_space = pygrid-vac.hec.lancs.ac.uk
 
 factories = {{ groups['vac'][0] }}
 {% for item in groups['vac'][1:] %}
-{# {{ hostvars[item]['_host'] }} {{ item }} #}
             {{ item }}
 {% endfor %}
 
@@ -33,68 +32,68 @@ mb_per_machine = {{ vac_mb_per_machine }}
 # Vac will take the hostname of the factory to make the name of the VMs.
 # On wn01.example.com, they will be wn01-00.example.com, 
 # wn01-01.example.com, wn01-02.example.com, ...
-vac_total_machines = {{ vac_total_machines }}
+total_machines = {{ vac_total_machines }}
 
 # Setting this to zero disables the creation or use of logical volumes in
 # vac_volume_group. For production, remove this option or set it to 
 # something like 40
-vac_scratch_gb = {{ vac_scratch_gb }}
-vac_volume_group = {{ vac_volume_group }}
+scratch_gb = {{ vac_scratch_gb }}
+volume_group = {{ vac_volume_group }}
 
 
 [vmtype atlas]
-vac_atlas_vm_model = {{ vac_atlas_vm_model }}
-vac_atlas_heartbeat_file = {{ vac_atlas_heartbeat_file }}
-vac_atlas_heartbeat_seconds = {{ vac_atlas_heartbeat_seconds }}
-vac_atlas_root_image = {{ vac_atlas_root_image }}
-vac_atlas_root_public_key = {{ vac_atlas_root_public_key }}
-vac_atlas_user_data = {{ vac_atlas_user_data }}
-vac_atlas_user_data_option_queue = {{ vac_atlas_user_data_option_queue }}
-vac_atlas_user_data_option_cvmfs_proxy = {{ vac_atlas_user_data_option_cvmfs_proxy }}
-vac_atlas_user_data_file_hostcert = {{ vac_atlas_user_data_file_hostcert }}
-vac_atlas_user_data_file_hostkey = {{ vac_atlas_user_data_file_hostkey }}
-vac_atlas_user_data_option_default_se = {{ vac_atlas_user_data_option_default_se }}
-vac_atlas_user_data_option_http_logs = {{ vac_atlas_user_data_option_http_logs }}
-vac_atlas_backoff_seconds = {{ vac_atlas_backoff_seconds }}
-vac_atlas_fizzle_seconds = {{ vac_atlas_fizzle_seconds }}
-vac_atlas_max_wallclock_seconds = {{ vac_atlas_max_wallclock_seconds }}
-vac_atlas_log_machineoutputs = {{ vac_atlas_log_machineoutputs }}
-vac_atlas_accounting_fqan = {{ vac_atlas_accounting_fqan }}
-vac_atlas_target_share = {{ vac_atlas_target_share }}
+vm_model = {{ vac_atlas_vm_model }}
+heartbeat_file = {{ vac_atlas_heartbeat_file }}
+heartbeat_seconds = {{ vac_atlas_heartbeat_seconds }}
+root_image = {{ vac_atlas_root_image }}
+root_public_key = {{ vac_atlas_root_public_key }}
+user_data = {{ vac_atlas_user_data }}
+user_data_option_queue = {{ vac_atlas_user_data_option_queue }}
+user_data_option_cvmfs_proxy = {{ vac_atlas_user_data_option_cvmfs_proxy }}
+user_data_file_hostcert = {{ vac_atlas_user_data_file_hostcert }}
+user_data_file_hostkey = {{ vac_atlas_user_data_file_hostkey }}
+user_data_option_default_se = {{ vac_atlas_user_data_option_default_se }}
+user_data_option_http_logs = {{ vac_atlas_user_data_option_http_logs }}
+backoff_seconds = {{ vac_atlas_backoff_seconds }}
+fizzle_seconds = {{ vac_atlas_fizzle_seconds }}
+max_wallclock_seconds = {{ vac_atlas_max_wallclock_seconds }}
+log_machineoutputs = {{ vac_atlas_log_machineoutputs }}
+accounting_fqan = {{ vac_atlas_accounting_fqan }}
+target_share = {{ vac_atlas_target_share }}
 
 [vmtype lhcb]
-vac_lhcb_vm_model = {{ vac_lhcb_vm_model }}
-vac_lhcb_heartbeat_file = {{ vac_lhcb_heartbeat_file }}
-vac_lhcb_heartbeat_seconds = {{ vac_lhcb_heartbeat_seconds }}
-vac_lhcb_root_image = {{ vac_lhcb_root_image }}
-vac_lhcb_root_public_key = {{ vac_lhcb_root_public_key }}
-vac_lhcb_user_data = {{ vac_lhcb_user_data }}
-vac_lhcb_user_data_option_dirac_site = {{ vac_lhcb_user_data_option_dirac_site }}
-vac_lhcb_user_data_option_cvmfs_proxy = {{ vac_lhcb_user_data_option_cvmfs_proxy }}
-vac_lhcb_user_data_file_hostcert = {{ vac_lhcb_user_data_file_hostcert }}
-vac_lhcb_user_data_file_hostkey = {{ vac_lhcb_user_data_file_hostkey }}
-vac_lhcb_backoff_seconds = {{ vac_lhcb_backoff_seconds }}
-vac_lhcb_fizzle_seconds = {{ vac_lhcb_fizzle_seconds }}
-vac_lhcb_max_wallclock_seconds = {{ vac_lhcb_max_wallclock_seconds }}
-vac_lhcb_log_machineoutputs = {{ vac_lhcb_log_machineoutputs }}
-vac_lhcb_accounting_fqan = {{ vac_lhcb_accounting_fqan }}
-vac_lhcb_target_share = {{ vac_lhcb_target_share }}
+vm_model = {{ vac_lhcb_vm_model }}
+heartbeat_file = {{ vac_lhcb_heartbeat_file }}
+heartbeat_seconds = {{ vac_lhcb_heartbeat_seconds }}
+root_image = {{ vac_lhcb_root_image }}
+root_public_key = {{ vac_lhcb_root_public_key }}
+user_data = {{ vac_lhcb_user_data }}
+user_data_option_dirac_site = {{ vac_lhcb_user_data_option_dirac_site }}
+user_data_option_cvmfs_proxy = {{ vac_lhcb_user_data_option_cvmfs_proxy }}
+user_data_file_hostcert = {{ vac_lhcb_user_data_file_hostcert }}
+user_data_file_hostkey = {{ vac_lhcb_user_data_file_hostkey }}
+backoff_seconds = {{ vac_lhcb_backoff_seconds }}
+fizzle_seconds = {{ vac_lhcb_fizzle_seconds }}
+max_wallclock_seconds = {{ vac_lhcb_max_wallclock_seconds }}
+log_machineoutputs = {{ vac_lhcb_log_machineoutputs }}
+accounting_fqan = {{ vac_lhcb_accounting_fqan }}
+target_share = {{ vac_lhcb_target_share }}
 
 [vmtype gridpp]
-vac_gridpp_vm_model = {{ vac_gridpp_vm_model }}
-vac_gridpp_heartbeat_file = {{ vac_gridpp_heartbeat_file }}
-vac_gridpp_heartbeat_seconds = {{ vac_gridpp_heartbeat_seconds }}
-vac_gridpp_root_image = {{ vac_gridpp_root_image }}
-vac_gridpp_root_public_key = {{ vac_gridpp_root_public_key }}
-vac_gridpp_user_data = {{ vac_gridpp_user_data }}
-vac_gridpp_user_data_option_dirac_site = {{ vac_gridpp_user_data_option_dirac_site }}
-vac_gridpp_user_data_option_submit_pool = {{ vac_gridpp_user_data_option_submit_pool }}
-vac_gridpp_user_data_option_cvmfs_proxy = {{ vac_gridpp_user_data_option_cvmfs_proxy }}
-vac_gridpp_user_data_file_hostcert = {{ vac_gridpp_user_data_file_hostcert }}
-vac_gridpp_user_data_file_hostkey = {{ vac_gridpp_user_data_file_hostkey }}
-vac_gridpp_backoff_seconds = {{ vac_gridpp_backoff_seconds }}
-vac_gridpp_fizzle_seconds = {{ vac_gridpp_fizzle_seconds }}
-vac_gridpp_max_wallclock_seconds = {{ vac_gridpp_max_wallclock_seconds }}
-vac_gridpp_log_machineoutputs = {{ vac_gridpp_log_machineoutputs }}
-vac_gridpp_accounting_fqan = {{ vac_gridpp_accounting_fqan }}
-vac_gridpp_target_share = {{ vac_gridpp_target_share }}
+vm_model = {{ vac_gridpp_vm_model }}
+heartbeat_file = {{ vac_gridpp_heartbeat_file }}
+heartbeat_seconds = {{ vac_gridpp_heartbeat_seconds }}
+root_image = {{ vac_gridpp_root_image }}
+root_public_key = {{ vac_gridpp_root_public_key }}
+user_data = {{ vac_gridpp_user_data }}
+user_data_option_dirac_site = {{ vac_gridpp_user_data_option_dirac_site }}
+user_data_option_submit_pool = {{ vac_gridpp_user_data_option_submit_pool }}
+user_data_option_cvmfs_proxy = {{ vac_gridpp_user_data_option_cvmfs_proxy }}
+user_data_file_hostcert = {{ vac_gridpp_user_data_file_hostcert }}
+user_data_file_hostkey = {{ vac_gridpp_user_data_file_hostkey }}
+backoff_seconds = {{ vac_gridpp_backoff_seconds }}
+fizzle_seconds = {{ vac_gridpp_fizzle_seconds }}
+max_wallclock_seconds = {{ vac_gridpp_max_wallclock_seconds }}
+log_machineoutputs = {{ vac_gridpp_log_machineoutputs }}
+accounting_fqan = {{ vac_gridpp_accounting_fqan }}
+target_share = {{ vac_gridpp_target_share }}
