@@ -109,9 +109,14 @@ None.
 Example Playbook
 ----------------
 
-    - hosts: servers
+    - hosts: vac-servers
       roles:
-         - { role: username.vac}
+         - { role: root}
+      vars: 
+        vac_gateway_ip: 192.30.252.130
+	vac_vm_cert: group_files/vac/vm-cert.pem
+	vac_vm_key: group_files/vac/vm-key.pem
+	vac_atlas_target_share: 98 # Give atlas highest share.
 
 License
 -------
