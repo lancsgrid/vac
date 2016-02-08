@@ -19,19 +19,13 @@
 
 # check vmtype directories exist
 - name: copy vm-keys and vm-cert to /etc/vac.d
-  file: path={{item}} state=directory mode=0755
-  with_items:
-  - /var/lib/vac/vmtypes/atlas
-  - /var/lib/vac/vmtypes/lhcb
-  - /var/lib/vac/vmtypes/gridpp
+  file: path="/var/lib/vac/vmtypes/{{ item.keys()[0] }}" state=directory mode=0755
+  with_items: "{{ vmtypes }}"
 
 # copy ssh keys to /var/lib/vac/vmtypes/
 - name: copy vm-keys and vm-cert to /etc/vac.d
-  copy: src="{{ vac_vm_cert }}" dest=/var/lib/vac/vmtypes/{{ item }}/vm-cert.pem mode="u=rw,g=r,o=r"
-  with_items:
-  - atlas
-  - lhcb
-  - gridpp
+  copy: src="{{ vac_vm_cert }}" dest=/var/lib/vac/vmtypes/{{ item.keys()[0] }}/vm-cert.pem mode="u=rw,g=r,o=r"
+  with_items: "{{ vmtypes }}"
 
 # ensure vacd is enabled and on
 - name: ensure vac is enabled
