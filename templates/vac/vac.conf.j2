@@ -1,99 +1,75 @@
 #
-# Example /etc/vac.conf file for Vac
+# etc/vac.conf file for Vac generated using ansible. Do not edit directly,
+# use ansible variables to modify this file.
 #
-# See http://www.gridpp.ac.uk/vac/ and the Vac Admin Guide in 
-# /var/lib/vac/doc/ for more about Vac and how to use this file.
-#
-# You must replace domain names ending in .example.com in 
-# vac_space and factories with the domain name of your own site.
-#
-# Andrew.McNab@cern.ch  January 2015
+# See https://github.com/lancsgrid/vac for information on how to modify 
+# the template.
 #
 
 [settings]
 # Name of this vac space. Should be a DNS-like name, and will be needed to
 # when referring to this vac space as a virtual CE in other systems.
-vac_space = pygrid-vac.hec.lancs.ac.uk
 
-# A list of all the factory machines in this space. To add more factories,
-# add them to the factories= line, separated by spaces. You can use '\' as the
-# last character of a line to continue the factories= assignment. This option
-# must include the fully qualified hostname of this factory machine itself.
+{%if vac_vac_space is defined %}
+vac_space = {{ vac_vac_space }}
+{% endif %}
 
 factories = {{ groups['vac'][0] }}
 {% for item in groups['vac'][1:] %}
             {{ item }}
 {% endfor %}
 
-# MiB of memory allocated to each VM.
-mb_per_machine = {{ vac_mb_per_machine }}
+udp_timeout_seconds = {{ vac_udp_timeout_seconds }}
 
-# total_machines allows you to say how many VMs Vac will manage.
-# Vac will take the hostname of the factory to make the name of the VMs.
-# On wn01.example.com, they will be wn01-00.example.com, 
-# wn01-01.example.com, wn01-02.example.com, ...
+domain_type = {{ vac_domain_type }}
+
+delete_old_files = {{ vac_delete_old_files }}
+
+cpu_per_machine = {{ vac_cpu_per_machine }}
+
+mb_per_cpu = {{ vac_mb_per_cpu }}
+
+hs06_per_cpu = {{ vac_hs06_per_cpu }}
+
+version_logger = {{ vac_version_logger }}
+
 total_machines = {{ vac_total_machines }}
 
-# Setting this to zero disables the creation or use of logical volumes in
-# vac_volume_group. For production, remove this option or set it to 
-# something like 40
-scratch_gb = {{ vac_scratch_gb }}
+cpu_total = {{ vac_cpu_total }}
+
+overload_per_cpu = {{ vac_overload_per_cpu }}
+
 volume_group = {{ vac_volume_group }}
 
+scratch_gb = {{ vac_scratch_gb }}
 
-[vmtype atlas]
-vm_model = {{ vac_atlas_vm_model }}
-heartbeat_file = {{ vac_atlas_heartbeat_file }}
-heartbeat_seconds = {{ vac_atlas_heartbeat_seconds }}
-root_image = {{ vac_atlas_root_image }}
-root_public_key = {{ vac_atlas_root_public_key }}
-user_data = {{ vac_atlas_user_data }}
-user_data_option_queue = {{ vac_atlas_user_data_option_queue }}
-user_data_option_cvmfs_proxy = {{ vac_atlas_user_data_option_cvmfs_proxy }}
-user_data_file_hostcert = {{ vac_atlas_user_data_file_hostcert }}
-user_data_file_hostkey = {{ vac_atlas_user_data_file_hostkey }}
-user_data_option_default_se = {{ vac_atlas_user_data_option_default_se }}
-user_data_option_http_logs = {{ vac_atlas_user_data_option_http_logs }}
-backoff_seconds = {{ vac_atlas_backoff_seconds }}
-fizzle_seconds = {{ vac_atlas_fizzle_seconds }}
-max_wallclock_seconds = {{ vac_atlas_max_wallclock_seconds }}
-log_machineoutputs = {{ vac_atlas_log_machineoutputs }}
-accounting_fqan = {{ vac_atlas_accounting_fqan }}
-target_share = {{ vac_atlas_target_share }}
+fix_networking = {{ vac_fix_networking }}
 
-[vmtype lhcb]
-vm_model = {{ vac_lhcb_vm_model }}
-heartbeat_file = {{ vac_lhcb_heartbeat_file }}
-heartbeat_seconds = {{ vac_lhcb_heartbeat_seconds }}
-root_image = {{ vac_lhcb_root_image }}
-root_public_key = {{ vac_lhcb_root_public_key }}
-user_data = {{ vac_lhcb_user_data }}
-user_data_option_dirac_site = {{ vac_lhcb_user_data_option_dirac_site }}
-user_data_option_cvmfs_proxy = {{ vac_lhcb_user_data_option_cvmfs_proxy }}
-user_data_file_hostcert = {{ vac_lhcb_user_data_file_hostcert }}
-user_data_file_hostkey = {{ vac_lhcb_user_data_file_hostkey }}
-backoff_seconds = {{ vac_lhcb_backoff_seconds }}
-fizzle_seconds = {{ vac_lhcb_fizzle_seconds }}
-max_wallclock_seconds = {{ vac_lhcb_max_wallclock_seconds }}
-log_machineoutputs = {{ vac_lhcb_log_machineoutputs }}
-accounting_fqan = {{ vac_lhcb_accounting_fqan }}
-target_share = {{ vac_lhcb_target_share }}
+#No defaults provided
+{%if vac_forward_dev is defined %}
+forward_dev = {{ vac_forward_dev }}
+{% endif %}
 
-[vmtype gridpp]
-vm_model = {{ vac_gridpp_vm_model }}
-heartbeat_file = {{ vac_gridpp_heartbeat_file }}
-heartbeat_seconds = {{ vac_gridpp_heartbeat_seconds }}
-root_image = {{ vac_gridpp_root_image }}
-root_public_key = {{ vac_gridpp_root_public_key }}
-user_data = {{ vac_gridpp_user_data }}
-user_data_option_dirac_site = {{ vac_gridpp_user_data_option_dirac_site }}
-user_data_option_submit_pool = {{ vac_gridpp_user_data_option_submit_pool }}
-user_data_option_cvmfs_proxy = {{ vac_gridpp_user_data_option_cvmfs_proxy }}
-user_data_file_hostcert = {{ vac_gridpp_user_data_file_hostcert }}
-user_data_file_hostkey = {{ vac_gridpp_user_data_file_hostkey }}
-backoff_seconds = {{ vac_gridpp_backoff_seconds }}
-fizzle_seconds = {{ vac_gridpp_fizzle_seconds }}
-max_wallclock_seconds = {{ vac_gridpp_max_wallclock_seconds }}
-log_machineoutputs = {{ vac_gridpp_log_machineoutputs }}
-accounting_fqan = {{ vac_gridpp_accounting_fqan }}
-target_share = {{ vac_gridpp_target_share }}
+{%if vac_vacmon_hostport is defined %}
+vacmon_hostport = {{ vac_vacmon_hostport }}
+{% endif %}
+
+{%if vac_shutdown_time is defined %}
+shutdown_time = {{ vac_shutdown_time }}
+{% endif %}
+
+{%if vac_gocdb_sitename is defined %}
+gocdb_sitename = {{ vac_gocdb_sitename }}
+{% endif %}
+
+
+
+{% for vmtype in vmtypes %}
+{% for vmtype_name, vmtype_parameters in vmtype.iteritems() %}
+[vmtype {{ vmtype_name }}]
+{% for vmtype_var, vmtype_var_value in vmtype_parameters.iteritems() %}
+{{ vmtype_var|e }} = {{ vmtype_var_value|e }}
+{% endfor %}
+
+{% endfor %}
+{% endfor %}
