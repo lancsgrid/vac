@@ -15,16 +15,16 @@ vac_vm_key: /root/vac-vm-cert.pem
 #### defaults for vac.conf
 
 ### All use vac defaults
-vac_udp_timeout_seconds = 5.0
-vac_domain_type = kvm
-vac_delete_old_files = True
-vac_cpu_per_machine = 1
-vac_mb_per_cpu = 2048
-vac_hs06_per_cpu = 1
-vac_version_logger = True
-vac_total_machines = {{ ansible_processor_vcpus }}
-vac_cpu_total = {{ ansible_processor_vcpus }}
-vac_overload_per_cpu = 2.0
-vac_volume_group = vac_volume_group
-vac_scratch_gb = 40
-vac_fix_networking = True
+vac_udp_timeout_seconds: 5.0
+vac_domain_type: kvm
+vac_delete_old_files: True
+vac_cpu_per_machine: 1
+vac_mb_per_cpu: 2048
+vac_hs06_per_cpu: 1
+vac_version_logger: True
+vac_total_machines: "{{ ansible_processor_vcpus }}"
+vac_cpu_total: "{{ ansible_processor_vcpus }}"
+vac_overload_per_cpu: 2.0
+vac_volume_group: vac_volume_group
+vac_scratch_gb: 40
+vac_fix_networking: True

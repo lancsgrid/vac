@@ -9,10 +9,10 @@
 [settings]
 # Name of this vac space. Should be a DNS-like name, and will be needed to
 # when referring to this vac space as a virtual CE in other systems.
-{%if vac_space is defined %}
+
+{%if vac_vac_space is defined %}
 vac_space = {{ vac_vac_space }}
 {% endif %}
-
 
 factories = {{ groups['vac'][0] }}
 {% for item in groups['vac'][1:] %}
@@ -46,19 +46,19 @@ scratch_gb = {{ vac_scratch_gb }}
 fix_networking = {{ vac_fix_networking }}
 
 #No defaults provided
-{%if forward_dev is defined %}
+{%if vac_forward_dev is defined %}
 forward_dev = {{ vac_forward_dev }}
 {% endif %}
 
-{%if vacmon_hostport is defined %}
+{%if vac_vacmon_hostport is defined %}
 vacmon_hostport = {{ vac_vacmon_hostport }}
 {% endif %}
 
-{%if shutdown_time is defined %}
+{%if vac_shutdown_time is defined %}
 shutdown_time = {{ vac_shutdown_time }}
 {% endif %}
 
-{%if gocdb_sitename is defined %}
+{%if vac_gocdb_sitename is defined %}
 gocdb_sitename = {{ vac_gocdb_sitename }}
 {% endif %}
 
