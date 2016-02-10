@@ -1,0 +1,8 @@
+[EMI-3-base]
+name=EMI 3 base 
+baseurl=http://emisoft.web.cern.ch/emisoft/dist/EMI/3/sl6/$basearch/base
+protect=1
+enabled=1
+# To use priorities you must have yum-priorities installed
+priority=40
+gpgcheck=0

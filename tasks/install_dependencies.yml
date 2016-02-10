@@ -57,6 +57,17 @@
 - name: configure repo for vac and egi
   copy: src=repos/EGI-trust.repo dest=/etc/yum.repos.d/EGI-trust.repo
 
+# install repos for egi
+- name: configure repo for vac and egi
+  copy: src=repos/emi3-base.repo dest=/etc/yum.repos.d/emi3-base.repo
+
+# install repos for EPEL
+- name: Install EPEL repo.
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm state=present
+
+# install apel-ssm
+- name: ensure apel-ssm is installed
+  yum: state=present name=apel-ssm
 
 # install ca policy
 - name: ensure ca policy is installed

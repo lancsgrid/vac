@@ -17,6 +17,17 @@
     - {src: "{{ vac_vm_cert }}", dest: /etc/vac.d/vm-cert.pem, mode: "u=rw,g=r,o=r"}
     - {src: "{{ vac_vm_key }}",  dest: /etc/vac.d/vm-key.pem,  mode: "u=r,g=,o="}
 
+# copy apel host cert and key to /etc/grid-security/
+- name: copy apel host cert and key to /etc/grid-security/
+  copy: src={{item.src}} dest={{item.dest}} mode={{item.mode}}
+  with_items:
+    - {src: "{{ apel_cert }}", dest: /etc/grid-security/hostcert.pem, mode: "u=rw,g=r,o=r"}
+    - {src: "{{ apel_key }}",  dest: /etc/grid-security/hostkey.pem,  mode: "u=r,g=,o="}
+
+# copy configs for ssmsend
+- name: ensure vac config files are present
+  template: src=vac-ssmsend-prod.cfg dest=/etc/apel/vac-ssmsend-prod.cfg
+
 # check vmtype directories exist
 - name: copy vm-keys and vm-cert to /etc/vac.d
   file: path="/var/lib/vac/vmtypes/{{ item.keys()[0] }}" state=directory mode=0755
@@ -30,3 +41,4 @@
 # ensure vacd is enabled and on
 - name: ensure vac is enabled
   service: state=started name=vacd enabled=yes
+
