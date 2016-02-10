@@ -26,7 +26,7 @@
 
 # copy configs for ssmsend
 - name: ensure vac config files are present
-  template: src=vac-ssmsend-prod.cfg dest=/etc/apel/vac-ssmsend-prod.cfg
+  copy: src=vac-ssmsend-prod.cfg dest=/etc/apel/vac-ssmsend-prod.cfg
 
 # check vmtype directories exist
 - name: copy vm-keys and vm-cert to /etc/vac.d
