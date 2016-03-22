@@ -25,8 +25,8 @@
     - {src: "{{ apel_key }}",  dest: /etc/grid-security/hostkey.pem,  mode: "u=r,g=,o="}
 
 # copy configs for ssmsend
-- name: ensure ssmsend config is present
-  copy: src=vac-ssmsend-prod.cfg dest=/etc/apel/vac-ssmsend-prod.cfg
+#- name: ensure ssmsend config is present
+ # copy: src=vac-ssmsend-prod.cfg dest=/etc/apel/vac-ssmsend-prod.cfg
 
 # check vmtype directories exist
 - name: copy vm-keys and vm-cert to /etc/vac.d

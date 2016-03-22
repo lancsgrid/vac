@@ -66,8 +66,8 @@
   yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm state=present
 
 # install apel-ssm
-- name: ensure apel-ssm is installed
-  yum: state=present name=apel-ssm
+#- name: ensure apel-ssm is installed
+#  yum: state=present name=apel-ssm
 
 # install ca policy
 - name: ensure ca policy is installed
