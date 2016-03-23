@@ -45,14 +45,6 @@
   service: name=numad state=running enabled=yes
 
 
-# nfs
-- name: ensure nfs-utils is installed
-  yum: state=present name=nfs-utils
-
-- name: ensure nfs is running and enabled
-  service: name=nfs state=running enabled=yes
-
-
 # install repos for egi
 - name: configure repo for vac and egi
   copy: src=repos/EGI-trust.repo dest=/etc/yum.repos.d/EGI-trust.repo
@@ -64,10 +56,6 @@
 # install repos for EPEL
 - name: Install EPEL repo.
   yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm state=present
-
-# install apel-ssm
-#- name: ensure apel-ssm is installed
-#  yum: state=present name=apel-ssm
 
 # install ca policy
 - name: ensure ca policy is installed
