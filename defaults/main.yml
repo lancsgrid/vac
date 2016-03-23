@@ -22,9 +22,8 @@ vac_cpu_per_machine: 1
 vac_mb_per_cpu: 2048
 vac_hs06_per_cpu: 1
 vac_version_logger: True
-vac_total_machines: "{{ ansible_processor_vcpus }}"
 vac_cpu_total: "{{ ansible_processor_vcpus }}"
 vac_overload_per_cpu: 2.0
 vac_volume_group: vac_volume_group
-vac_scratch_gb: 40
+vac_disk_gb_per_cpu: 40
 vac_fix_networking: True

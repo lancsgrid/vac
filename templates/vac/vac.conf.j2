@@ -60,11 +60,11 @@ gocdb_sitename = {{ vac_gocdb_sitename }}
 
 
 
-{% for vmtype in vmtypes %}
-{% for vmtype_name, vmtype_parameters in vmtype.iteritems() %}
-[vmtype {{ vmtype_name }}]
-{% for vmtype_var, vmtype_var_value in vmtype_parameters.iteritems() %}
-{{ vmtype_var|e }} = {{ vmtype_var_value|e }}
+{% for machinetype in machinetypes %}
+{% for machinetype_name, machinetype_parameters in machinetype.iteritems() %}
+[machinetype {{ machinetype_name }}]
+{% for machinetype_var, machinetype_var_value in machinetype_parameters.iteritems() %}
+{{ machinetype_var|e }} = {{ machinetype_var_value|e }}
 {% endfor %}
 
 {% endfor %}
