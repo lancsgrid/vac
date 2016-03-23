@@ -17,22 +17,28 @@
     - {src: "{{ vac_vm_cert }}", dest: /etc/vac.d/vm-cert.pem, mode: "u=rw,g=r,o=r"}
     - {src: "{{ vac_vm_key }}",  dest: /etc/vac.d/vm-key.pem,  mode: "u=r,g=,o="}
 
-# check vmtype directories exist
-- name: copy vm-keys and vm-cert to /etc/vac.d
-  file: path={{item}} state=directory mode=0755
+# copy apel host cert and key to /etc/grid-security/
+- name: copy apel host cert and key to /etc/grid-security/
+  copy: src={{item.src}} dest={{item.dest}} mode={{item.mode}}
   with_items:
-  - /var/lib/vac/vmtypes/atlas
-  - /var/lib/vac/vmtypes/lhcb
-  - /var/lib/vac/vmtypes/gridpp
+    - {src: "{{ apel_cert }}", dest: /etc/grid-security/hostcert.pem, mode: "u=rw,g=r,o=r"}
+    - {src: "{{ apel_key }}",  dest: /etc/grid-security/hostkey.pem,  mode: "u=r,g=,o="}
 
-# copy ssh keys to /var/lib/vac/vmtypes/
+# copy configs for ssmsend
+#- name: ensure ssmsend config is present
+ # copy: src=vac-ssmsend-prod.cfg dest=/etc/apel/vac-ssmsend-prod.cfg
+
+# check machinetype directories exist
 - name: copy vm-keys and vm-cert to /etc/vac.d
-  copy: src="{{ vac_vm_cert }}" dest=/var/lib/vac/vmtypes/{{ item }}/vm-cert.pem mode="u=rw,g=r,o=r"
-  with_items:
-  - atlas
-  - lhcb
-  - gridpp
+  file: path="/var/lib/vac/machinetypes/{{ item.keys()[0] }}" state=directory mode=0755
+  with_items: "{{ machinetypes }}"
+
+# copy ssh keys to /var/lib/vac/machinetypes/
+- name: copy vm-keys and vm-cert to /etc/vac.d
+  copy: src="{{ vac_vm_cert }}" dest=/var/lib/vac/machinetypes/{{ item.keys()[0] }}/vm-cert.pem mode="u=rw,g=r,o=r"
+  with_items: "{{ machinetypes }}"
 
 # ensure vacd is enabled and on
 - name: ensure vac is enabled
   service: state=started name=vacd enabled=yes
+

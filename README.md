@@ -3,9 +3,9 @@ lancsgrid_vac
 
 An Ansible role that installs and configures vac on SL/RHEL/CentOS 6.x .
 
-Current version: v0.19.2.  If the tag in master differs from the version of this readme, then the readme is out of date.  Please email me to encourage me to update it.
+Current version: v0.22.0.  If the tag in master differs from the version of this readme, then the readme is out of date.  Please email me to encourage me to update it.
 
-Version description:  This is a stable, tested version. It allows the setting of all variables in vac.
+Version description:  This is a stable, tested version. It allows the setting of all variables in vac. The variables in this differ from those previoulsy used in earlier versions.  See the vac notes or example playbook for details.
 
 Requirements
 ------------
@@ -25,30 +25,26 @@ The config file for vac is built using the jinja2 templating engine. The variabl
 
 `vac_domain_type: kvm`
 
-`vac_delete_old_files: True`
-
 `vac_cpu_per_machine: 1`
 
 `vac_mb_per_cpu: 2048`
 
 `vac_hs06_per_cpu: 1`
 
-`vac_version_logger: True`
-
-`vac_total_machines: "{{ ansible_processor_vcpus }}"`
+`vac_version_logger: 1`
 
 `vac_cpu_total: "{{ ansible_processor_vcpus }}"`
 
 `vac_overload_per_cpu: 2.0`
 
 `vac_volume_group: vac_volume_group`
-
-`vac_scratch_gb: 40`
+		   
+`disk_gb_per_cpu: 40`
 
 `vac_fix_networking: True`
 
 
-There are four generic variables that lack defaults in vac, so they have no been given in this role either. They are: `vac_vac_space, vac_forward_dev, vac_vacmon_hostport, vac_shutdown_time, vac_gocdb_sitename`.  vac_vac_space and vac_gocdb_sitename need to be set as they are needed by vac but lack default values.
+There are four generic variables that lack defaults in vac, so they have not been given in this role either. They are: `vac_vac_space, vac_forward_dev, vac_vacmon_hostport, vac_shutdown_time, vac_gocdb_sitename`.  vac_vac_space and vac_gocdb_sitename need to be set as they are needed by vac but lack default values.
 
 Role Variables - vmtype
 --------------
@@ -75,64 +71,65 @@ Example Playbook
 	# Generic settings for vac
 	vac_hs06_per_cpu: 10
 	vac_vac_space: pygrid-vac.hec.lancs.ac.uk
+	vac_disk_gb_per_cpu: 25
 	vac_scratch_gb: 25
 	vac_volume_group: VolGroup
 	vac_gocdb_sitename: UKI-NORTHGRID-LANCS-HEP
 	vac_total_machines: 6
 
 	# Settings for vm types (note lac of vac_prefix, these follow vac names exactly.)
-	vmtypes:
-	  - atlas:
-	       heartbeat_file: vm-heartbeat
-	       heartbeat_seconds: 600
-     	       root_image: https://repo.gridpp.ac.uk/vacproject/atlas/cernvm3.iso
-     	       root_public_key: /root/.ssh/id_rsa.pub
-     	       user_data: https://repo.gridpp.ac.uk/vacproject/atlas/user_data
-     	       user_data_option_queue: UKI-NORTHGRID-LANCS-HEP_VAC
-     	       user_data_option_cvmfs_proxy: http://squid.server.ac.uk:3128
-     	       user_data_file_hostcert: /etc/vac.d/vm-cert.pem
-               user_data_file_hostkey: /etc/vac.d/vm-key.pem
-               user_data_option_default_se: dpm.server.ac.uk
-               user_data_option_http_logs: http://%f/
-               backoff_seconds: 600
-               fizzle_seconds: 600
-               max_wallclock_seconds: 172800
-               log_machineoutputs: True
-               accounting_fqan: /atlas/Role=NULL/Capability=NULL
-               target_share: 98
-	  - lhcb:
-               heartbeat_file: vm-heartbeat
-               heartbeat_seconds: 600
-               root_image: https://lhcbproject.web.cern.ch/lhcbproject/Operations/VM/cernvm3.iso
-               root_public_key: /root/.ssh/id_rsa.pub
-               user_data: https://lhcbproject.web.cern.ch/lhcbproject/Operations/VM/user_data
-               user_data_option_dirac_site: VAC.Site.uk
-               user_data_option_cvmfs_proxy: http://squid.server.ac.uk:3128
-               user_data_file_hostcert: /etc/vac.d/vm-cert.pem
-               user_data_file_hostkey: /etc/vac.d/vm-key.pem
-               backoff_seconds: 600
-               fizzle_seconds: 600
-               max_wallclock_seconds: 172800
-               log_machineoutputs: True
-               accounting_fqan: /lhcb/Role=NULL/Capability=NULL
-               target_share: 1
-          - gridpp:
-               heartbeat_file: vm-heartbeat
-               heartbeat_seconds: 600
-               root_image: https://repo.gridpp.ac.uk/vacproject/gridpp/cernvm3.iso
-               root_public_key: /root/.ssh/id_rsa.pub
-               user_data: https://repo.gridpp.ac.uk/vacproject/gridpp/user_data
-               user_data_option_dirac_site: VAC.Site.uk
-               user_data_option_submit_pool: gridppPool
-               user_data_option_cvmfs_proxy: http://squid.server.ac.uk:3128
-               user_data_file_hostcert: /etc/vac.d/vm-cert.pem
-               user_data_file_hostkey: /etc/vac.d/vm-key.pem
-               backoff_seconds: 600
-               fizzle_seconds: 600
-               max_wallclock_seconds: 172800
-               log_machineoutputs: True
-               accounting_fqan: /gridpp/Role=NULL/Capability=NULL
-               target_share: 1
+	machinetypes:
+	 - atlas:
+	    heartbeat_file: vm-heartbeat
+	    heartbeat_seconds: 600
+	    root_image: https://repo.gridpp.ac.uk/vacproject/atlas/cernvm3.iso
+	    root_public_key: /root/.ssh/id_rsa.pub
+	    user_data: https://repo.gridpp.ac.uk/vacproject/atlas/user_data
+	    user_data_option_queue: UKI-NORTHGRID-LANCS-HEP_VAC
+	    user_data_option_cvmfs_proxy: http://pygrid-kraken.hec.lancs.ac.uk:3128
+	    user_data_file_hostcert: /etc/vac.d/vm-cert.pem
+	    user_data_file_hostkey: /etc/vac.d/vm-key.pem
+	    user_data_option_default_se: fal-pygrid-30.lancs.ac.uk
+	    user_data_option_http_logs: http://%f/
+	    backoff_seconds: 600
+	    fizzle_seconds: 600
+	    max_wallclock_seconds: 172800
+	    machine_dir_days: 90
+	    accounting_fqan: /atlas/Role=NULL/Capability=NULL
+	    target_share: 98
+	 - lhcb:
+	    heartbeat_file: vm-heartbeat
+	    heartbeat_seconds: 600
+	    root_image: https://lhcbproject.web.cern.ch/lhcbproject/Operations/VM/cernvm3.iso
+	    root_public_key: /root/.ssh/id_rsa.pub
+	    user_data: https://lhcbproject.web.cern.ch/lhcbproject/Operations/VM/user_data
+	    user_data_option_dirac_site: VAC.Lancaster.uk
+	    user_data_option_cvmfs_proxy: http://pygrid-kraken.hec.lancs.ac.uk:3128
+	    user_data_file_hostcert: /etc/vac.d/vm-cert.pem
+	    user_data_file_hostkey: /etc/vac.d/vm-key.pem
+	    backoff_seconds: 600
+	    fizzle_seconds: 600
+	    max_wallclock_seconds: 172800
+	    machine_dir_days: 90
+	    accounting_fqan: /lhcb/Role=NULL/Capability=NULL
+	    target_share: 1
+	 - gridpp:
+	    heartbeat_file: vm-heartbeat
+	    heartbeat_seconds: 600
+	    root_image: https://repo.gridpp.ac.uk/vacproject/gridpp/cernvm3.iso
+	    root_public_key: /root/.ssh/id_rsa.pub
+	    user_data: https://repo.gridpp.ac.uk/vacproject/gridpp/user_data
+	    user_data_option_dirac_site: VAC.Lancaster.uk
+	    user_data_option_submit_pool: gridppPool
+	    user_data_option_cvmfs_proxy: http://pygrid-kraken.hec.lancs.ac.uk:3128
+	    user_data_file_hostcert: /etc/vac.d/vm-cert.pem
+	    user_data_file_hostkey: /etc/vac.d/vm-key.pem
+	    backoff_seconds: 600
+	    fizzle_seconds: 600
+	    max_wallclock_seconds: 172800
+	    machine_dir_days: 90
+	    accounting_fqan: /gridpp/Role=NULL/Capability=NULL
+	    target_share: 1
 
 
 License
