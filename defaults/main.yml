@@ -21,7 +21,7 @@ vac_delete_old_files: True
 vac_cpu_per_machine: 1
 vac_mb_per_cpu: 2048
 vac_hs06_per_cpu: 1
-vac_version_logger: True
+vac_version_logger: 1
 vac_cpu_total: "{{ ansible_processor_vcpus }}"
 vac_overload_per_cpu: 2.0
 vac_volume_group: vac_volume_group
