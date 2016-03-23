@@ -21,11 +21,7 @@ factories = {{ groups['vac'][0] }}
 
 udp_timeout_seconds = {{ vac_udp_timeout_seconds }}
 
-domain_type = {{ vac_domain_type }}
-
 delete_old_files = {{ vac_delete_old_files }}
-
-cpu_per_machine = {{ vac_cpu_per_machine }}
 
 mb_per_cpu = {{ vac_mb_per_cpu }}
 
@@ -33,15 +29,15 @@ hs06_per_cpu = {{ vac_hs06_per_cpu }}
 
 version_logger = {{ vac_version_logger }}
 
-total_machines = {{ vac_total_machines }}
-
 cpu_total = {{ vac_cpu_total }}
+
+cpu_per_machine = {{ vac_cpu_per_machine }}
 
 overload_per_cpu = {{ vac_overload_per_cpu }}
 
 volume_group = {{ vac_volume_group }}
 
-scratch_gb = {{ vac_scratch_gb }}
+disk_gb_per_cpu = {{ vac_disk_gb_per_cpu }}
 
 fix_networking = {{ vac_fix_networking }}
 
